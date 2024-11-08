@@ -1,3 +1,4 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
+<script>
+</script>
+
+<div class="bg-1st h-full"></div>
