@@ -7,6 +7,12 @@ import adapter from "@sveltejs/adapter-static";
 const config = {
   kit: {
     adapter: adapter(),
+    alias: {
+      '$svgIcon': 'src/assets/svg-icon'
+    }
+  },
+  compilerOptions: {
+    runes: true,
   },
 };
 

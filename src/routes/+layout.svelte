@@ -4,6 +4,8 @@
 
   import "../app.css";
   import CloseIcon from "../assets/svg-icon/close.svelte";
+
+  let { children } = $props();
 </script>
 
 <div class="h-screen flex flex-col">
@@ -13,10 +15,10 @@
   >
     <button
       class="bg-alert w-[60px] h-[30px] flex justify-center items-center rounded-[5px]"
-      on:click={() => appWindow.close()}
+      onclick={() => appWindow.close()}
     >
       <CloseIcon />
     </button>
   </div>
-  <slot />
+  {@render children()}
 </div>
