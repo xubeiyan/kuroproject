@@ -4,7 +4,8 @@
 </script>
 
 <button
-  class="size-[35px] rounded-full flex justify-center items-center bg-2nd 
+  class="absolute top-[20px] left-[20px]
+  size-[35px] rounded-full flex justify-center items-center bg-2nd
   hover:outline outline-3rd"
   {...props}
 >

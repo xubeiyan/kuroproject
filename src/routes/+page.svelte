@@ -7,12 +7,12 @@
 
   let stage = $state("select_save_method");
 
-  const handleToStage = (e) => {
-    if (e.detail == "selectSaveMethod") {
+  const handleToStage = (stageName) => {
+    if (stageName == "selectSaveMethod") {
       stage = "select_save_method";
-    } else if (e.detail == "cloud") {
+    } else if (stageName == "cloud") {
       stage = "cloud_login";
-    } else if (e.detail == "usb") {
+    } else if (stageName == "usb") {
       stage = "mobile_device_select";
     }
   };
@@ -20,11 +20,11 @@
 
 <div class="bg-1st h-full">
   {#if stage == "select_save_method"}
-    <SelectSaveMethod on:toStage={handleToStage} />
+    <SelectSaveMethod toStage={handleToStage} />
   {:else if stage == "cloud_login"}
-    <CloudLogin on:toStage={handleToStage} />
+    <CloudLogin toStage={handleToStage} />
   {:else if stage == "mobile_device_select"}
-    <MobileDeviceSelect on:toStage={handleToStage} />
+    <MobileDeviceSelect toStage={handleToStage} />
   {/if}
   <FooterLogo />
 </div>

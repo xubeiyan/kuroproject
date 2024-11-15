@@ -2,9 +2,7 @@
   import CloudUploadIcon from "$svgIcon/cloud-upload.svelte";
   import SsdSquareIcon from "$svgIcon/ssd-square.svelte";
 
-  import { createEventDispatcher } from "svelte";
-
-  const dispatch = createEventDispatcher();
+  const { toStage } = $props();
 </script>
 
 <div class="w-full h-full flex flex-col items-center justify-center gap-[60px]">
@@ -12,7 +10,7 @@
   <div class="flex gap-[50px] justify-center">
     <button
       class="size-[300px] flex flex-col items-center justify-center bg-2nd rounded-[10px]"
-      onclick={() => dispatch("toStage", "cloud")}
+      onclick={() => toStage("cloud")}
     >
       <CloudUploadIcon />
       <h2 class="text-[24px] mt-[14px]">云端</h2>
@@ -20,7 +18,7 @@
     </button>
     <button
       class="size-[300px] flex flex-col items-center justify-center bg-2nd rounded-[10px]"
-      onclick={() => dispatch("toStage", "usb")}
+      onclick={() => toStage("usb")}
     >
       <SsdSquareIcon />
       <h2 class="text-[24px] mt-[14px]">可移动存储</h2>
