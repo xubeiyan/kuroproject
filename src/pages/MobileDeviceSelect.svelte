@@ -10,7 +10,10 @@
   // 路径
   let savePath = $state(null);
   // 可用大小
-  let avaliable_size = $state(0);
+  let device = $state({
+    avaliable_size: 0,
+    removable: false,
+  });
 
   const selectSavePath = async () => {
     const getSavePath = await open({
@@ -22,7 +25,13 @@
 
     if (getSavePath != null) {
       invoke("get_free_space", { file_path: getSavePath }).then(
-        (size) => (avaliable_size = size)
+        (json_string) => {
+          const resultObj = JSON.parse(json_string);
+          device = {
+            avaliable_size: (resultObj.size / (1024 * 1024)).toFixed(3),
+            removable: resultObj.removable,
+          };
+        }
       );
     }
   };
@@ -50,7 +59,7 @@
       >
       <div
         class="w-[300px] h-full border-[3px] border-2nd rounded-[30px]
-      px-[24px] py-[40px] space-y-8"
+      px-[24px] py-[40px] space-y-4"
       >
         <div>
           <h1 class="text-[24px] text-4th">已选目录</h1>
@@ -58,13 +67,16 @@
         </div>
         <div>
           <h1 class="text-[24px] text-4th">可用空间</h1>
-          <span class="text-4th">{avaliable_size} MiB</span>
+          <span class="text-4th">{device.avaliable_size} MiB</span>
+        </div>
+        <div>
+          <h1 class="text-[24px] text-4th">可移动设备</h1>
+          <span class="text-4th">{device.removable ? "是" : "否"}</span>
         </div>
       </div>
       <button
         class="w-[150px] h-full
-      border-[3px] border-3rd bg-2nd rounded-[30px]"
-        >确认选择</button
+      border-[3px] border-3rd bg-2nd rounded-[30px]">确认选择</button
       >
     </div>
   {/if}
