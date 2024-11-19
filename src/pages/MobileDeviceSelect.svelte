@@ -21,19 +21,19 @@
       directory: true,
     });
 
-    savePath = getSavePath;
+    // 点取消按钮什么都不做
+    if (getSavePath == null) return;
 
-    if (getSavePath != null) {
-      invoke("get_free_space", { file_path: getSavePath }).then(
-        (json_string) => {
-          const resultObj = JSON.parse(json_string);
-          device = {
-            avaliable_size: (resultObj.size / (1024 * 1024)).toFixed(3),
-            removable: resultObj.removable,
-          };
-        }
-      );
-    }
+    savePath = getSavePath;
+    invoke("get_free_space", { file_path: getSavePath }).then(
+      (json_string) => {
+        const resultObj = JSON.parse(json_string);
+        device = {
+          avaliable_size: (resultObj.size / (1024 * 1024)).toFixed(3),
+          removable: resultObj.removable,
+        };
+      }
+    );
   };
 </script>
 
