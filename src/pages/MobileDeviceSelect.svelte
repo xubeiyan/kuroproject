@@ -25,15 +25,18 @@
     if (getSavePath == null) return;
 
     savePath = getSavePath;
-    invoke("get_free_space", { file_path: getSavePath }).then(
-      (json_string) => {
-        const resultObj = JSON.parse(json_string);
-        device = {
-          avaliable_size: (resultObj.size / (1024 * 1024)).toFixed(3),
-          removable: resultObj.removable,
-        };
-      }
-    );
+    invoke("get_free_space", { file_path: getSavePath }).then((json_string) => {
+      const resultObj = JSON.parse(json_string);
+      device = {
+        avaliable_size: (resultObj.size / (1024 * 1024)).toFixed(3),
+        removable: resultObj.removable,
+      };
+    });
+  };
+
+  // 确认选择
+  const confirmSelect = () => {
+    toStage("mainStage");
   };
 </script>
 
@@ -76,7 +79,8 @@
       </div>
       <button
         class="w-[150px] h-full
-      border-[3px] border-3rd bg-2nd rounded-[30px]">确认选择</button
+      border-[3px] border-3rd bg-2nd rounded-[30px]"
+        onclick={confirmSelect}>确认选择</button
       >
     </div>
   {/if}
