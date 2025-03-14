@@ -1,9 +1,15 @@
 <script>
+  import { basicStore } from "../stores/basicStore";
+
   import AddFolderIcon from "$svgIcon/add-folder.svelte";
+  import FolderCheckIcon from "$svgIcon/folder-check.svelte";
+  import UndoLeftSquareIcon from "$svgIcon/undo-left-square.svelte";
   import BackBtn from "../components/BackBtn.svelte";
 
   import { open } from "@tauri-apps/plugin-dialog";
   import { invoke } from "@tauri-apps/api/core";
+
+  import { generateConfigFile } from "$lib/configFile";
 
   const { toStage } = $props();
 
@@ -36,6 +42,8 @@
 
   // 确认选择
   const confirmSelect = () => {
+    // 生成配置文件
+    generateConfigFile({ savePath, hostname: $basicStore.device_name });
     toStage("mainStage");
   };
 </script>
@@ -46,7 +54,7 @@
   {#if savePath == null}
     <button
       class="w-[640px] h-[300px] rounded-[30px]
-      border-[3px] border-3rd border-dashed bg-2nd
+      border-[3px] hover:border-[4px] border-3rd border-dashed bg-2nd
       flex justify-center items-center gap-[8px]"
       onclick={selectSavePath}
     >
@@ -57,9 +65,13 @@
     <div class="w-[640px] h-[300px] flex justify-between">
       <button
         class="w-[150px] h-full
-      border-[3px] border-dashed border-3rd bg-2nd rounded-[30px]"
-        onclick={selectSavePath}>重新选择</button
+      border-[3px] hover:border-[4px] border-dashed border-3rd bg-2nd rounded-[30px]
+      flex flex-col items-center justify-center gap-1"
+        onclick={selectSavePath}
       >
+        <UndoLeftSquareIcon />
+        重新选择
+      </button>
       <div
         class="w-[300px] h-full border-[3px] border-2nd rounded-[30px]
       px-[24px] py-[40px] space-y-4"
@@ -79,9 +91,13 @@
       </div>
       <button
         class="w-[150px] h-full
-      border-[3px] border-3rd bg-2nd rounded-[30px]"
-        onclick={confirmSelect}>确认选择</button
+      border-[3px] hover:border-[4px] border-3rd bg-2nd rounded-[30px]
+      flex flex-col items-center justify-center gap-1"
+        onclick={confirmSelect}
       >
+        <FolderCheckIcon />
+        确认选择
+      </button>
     </div>
   {/if}
 </div>

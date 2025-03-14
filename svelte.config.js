@@ -8,7 +8,8 @@ const config = {
   kit: {
     adapter: adapter(),
     alias: {
-      '$svgIcon': 'src/assets/svg-icon'
+      '$svgIcon': 'src/assets/svg-icon',
+      "$lib": 'src/lib'
     }
   },
   compilerOptions: {
