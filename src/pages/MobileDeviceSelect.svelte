@@ -44,6 +44,13 @@
   const confirmSelect = () => {
     // 生成配置文件
     generateConfigFile({ savePath, hostname: $basicStore.device_name });
+    // 同步到store
+    basicStore.update((b) => ({
+      ...b,
+      async_folder: savePath,
+      async_mode: "mobile",
+    }));
+
     toStage("mainStage");
   };
 </script>
