@@ -14,7 +14,6 @@
     "fs:default",
     "fs:allow-exists",
     "fs:allow-appconfig-write",
-    "fs:allow-read-text-file",
     "fs:allow-read-file",
     "fs:allow-write-text-file",
     "os:default",

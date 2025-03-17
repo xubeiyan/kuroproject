@@ -53,7 +53,7 @@
   });
 </script>
 
-<div class="bg-1st h-full">
+<div class="bg-1st h-full flex flex-col">
   <TitleBar />
   {#if stage == "select_save_method"}
     <SelectSaveMethod toStage={handleToStage} />
