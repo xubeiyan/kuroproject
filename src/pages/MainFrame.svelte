@@ -50,6 +50,7 @@
   };
 
   const load_conf_file = () => {
+    selectedGame.left = null;
     if ($basicStore.async_folder == null) return;
 
     // 读取同步文件夹中的目录与配置
@@ -57,7 +58,6 @@
       (json_string) => {
         let content = JSON.parse(json_string);
         saveFromAsyncFolders = content.conf_file_content.game_save;
-        console.log('loaded!')
       }
     );
   };
@@ -78,35 +78,38 @@
   <div class="mt-4 grow text-4th grid grid-cols-[1fr_160px_1fr]">
     <div class="flex flex-col gap-[12px]">
       <p class="text-xl">同步文件夹存档</p>
-      <div
-        class="bg-2nd/50 rounded-[10px] overflow-y-auto max-h-[300px] grow mb-[20px] py-[4px] pl-[12px] pr-[7px] flex flex-col gap-[4px]"
-      >
-        <div class="flex justify-end">
+      <div class="bg-2nd/50 rounded-[10px] max-h-[330px] grow mb-[20px] flex flex-col">
+        <div class="flex justify-end p-[8px]">
           <button onclick={load_conf_file}>
             <Refresh />
           </button>
         </div>
-        {#each saveFromAsyncFolders as one, id}
-          <button
-            class="w-full flex items-center gap-[16px]
+        <div
+          class="py-[4px] pl-[12px] pr-[7px] flex flex-col gap-[4px] grow
+        overflow-y-auto custom-scroll"
+        >
+          {#each saveFromAsyncFolders as one, id}
+            <button
+              class="w-full flex items-center gap-[16px]
           border-2 border-3rd rounded-[10px] p-[8px] {leftSelectStyle(id)}"
-            onclick={() => selectGame({ side: "left", id })}
-          >
-            <img
-              class="size-[75px] rounded-[7px]"
-              src="/gameIcons/{one.db_id}.jpg"
-              alt={one.name}
-              onerror={handleError}
-            />
-            <div class="flex flex-col items-start text-sm">
-              <div class="h-[2.5rem] text-left">
-                <span class="font-bold">{one.name}</span>
+              onclick={() => selectGame({ side: "left", id })}
+            >
+              <img
+                class="size-[75px] rounded-[7px]"
+                src="/gameIcons/{one.db_id}.jpg"
+                alt={one.name}
+                onerror={handleError}
+              />
+              <div class="flex flex-col items-start text-sm">
+                <div class="h-[2.5rem] text-left">
+                  <span class="font-bold">{one.name}</span>
+                </div>
+                <span class="text-2nd-text">最后更新时间</span>
+                <span class="text-2nd-text">{one.last_update_time}</span>
               </div>
-              <span class="text-2nd-text">最后更新时间</span>
-              <span class="text-2nd-text">{one.last_update_time}</span>
-            </div>
-          </button>
-        {/each}
+            </button>
+          {/each}
+        </div>
       </div>
     </div>
     <div
@@ -138,3 +141,9 @@
     </div>
   </div>
 </div>
+
+<style>
+  .custom-scroll {
+    scrollbar-color: #4a628a #b9e5e8;
+  }
+</style>
