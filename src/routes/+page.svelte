@@ -13,7 +13,7 @@
   import { basicStore } from "../stores/basicStore";
   import { onMount } from "svelte";
 
-  let stage = $state("main_frame");
+  let stage = $state(null);
 
   const handleToStage = (stageName) => {
     if (stageName == "selectSaveMethod") {
@@ -50,6 +50,7 @@
       async_mode: asyncMode,
       device_name: deviceName,
     }));
+    stage = "main_frame";
   });
 </script>
 

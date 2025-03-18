@@ -9,4 +9,4 @@
 
 ## LICENSE
 
-我觉得都可以
+MIT License
